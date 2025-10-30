@@ -1,0 +1,15 @@
+# Autostart configuration for rpd-x (Raspberry Pi Desktop X11)
+# This file is placed in: ~/.config/lxsession/rpd-x/autostart
+# Lines starting with @ are autostart entries
+
+# Launch desktop file manager
+@pcmanfm --desktop --profile rpd-x
+
+# Disable screen blanking and power management
+@xset s off
+@xset -dpms
+@xset s noblank
+
+# Start the Chromium kiosk setup
+# Note: Adjust the username in the path if different from 'pi'
+@/home/pi/chromium-autostart.sh

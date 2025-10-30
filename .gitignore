@@ -1,0 +1,24 @@
+# User-specific configuration
+config.local
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Backup files
+*.bak
+*.backup

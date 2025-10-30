@@ -1,0 +1,52 @@
+# GitLab CI/CD Configuration for DuoDashboard Setup
+# This is a minimal CI setup for validating shell scripts
+
+stages:
+  - validate
+  - test
+
+# Validate shell scripts for syntax errors
+shellcheck:
+  stage: validate
+  image: koalaman/shellcheck-alpine:stable
+  script:
+    - shellcheck chromium-autostart.sh
+    - shellcheck scripts/start_chromium-monitor1.sh
+    - shellcheck scripts/start_chromium-monitor2.sh
+    - shellcheck install.sh
+  allow_failure: true
+
+# Check for common bash issues
+bash_syntax:
+  stage: validate
+  image: bash:latest
+  script:
+    - bash -n chromium-autostart.sh
+    - bash -n scripts/start_chromium-monitor1.sh
+    - bash -n scripts/start_chromium-monitor2.sh
+    - bash -n install.sh
+  allow_failure: false
+
+# Verify documentation exists
+docs_check:
+  stage: test
+  image: alpine:latest
+  script:
+    - test -f README.md || (echo "README.md missing" && exit 1)
+    - test -f LICENSE || (echo "LICENSE missing" && exit 1)
+    - test -f CHANGELOG.md || (echo "CHANGELOG.md missing" && exit 1)
+    - test -f CONTRIBUTING.md || (echo "CONTRIBUTING.md missing" && exit 1)
+    - echo "All required documentation files present"
+  allow_failure: false
+
+# Verify required scripts exist
+scripts_check:
+  stage: test
+  image: alpine:latest
+  script:
+    - test -f chromium-autostart.sh || (echo "chromium-autostart.sh missing" && exit 1)
+    - test -f scripts/start_chromium-monitor1.sh || (echo "start_chromium-monitor1.sh missing" && exit 1)
+    - test -f scripts/start_chromium-monitor2.sh || (echo "start_chromium-monitor2.sh missing" && exit 1)
+    - test -f install.sh || (echo "install.sh missing" && exit 1)
+    - echo "All required scripts present"
+  allow_failure: false
