@@ -156,8 +156,8 @@ The installer will:
 Edit the scripts to point to your dashboards:
 
 ```bash
-nano ~/scripts/start_chromium-monitor1.sh
-nano ~/scripts/start_chromium-monitor2.sh
+nano ~/scripts/start-chromium-monitor1.sh
+nano ~/scripts/start-chromium-monitor2.sh
 ```
 
 Change:
@@ -294,8 +294,8 @@ cat ~/.cache/lxsession/LXDE-pi/run.log
 Test scripts manually:
 
 ```bash
-~/scripts/start_chromium-monitor1.sh
-~/scripts/start_chromium-monitor2.sh
+~/scripts/start-chromium-monitor1.sh
+~/scripts/start-chromium-monitor2.sh
 ```
 
 Verify desktop session:
@@ -355,8 +355,8 @@ sudo systemctl restart x11vnc.service
 Edit the scripts and update the URLs:
 
 ```bash
-nano ~/scripts/start_chromium-monitor1.sh
-nano ~/scripts/start_chromium-monitor2.sh
+nano ~/scripts/start-chromium-monitor1.sh
+nano ~/scripts/start-chromium-monitor2.sh
 ```
 
 ### Adjust Startup Delays

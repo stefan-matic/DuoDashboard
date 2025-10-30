@@ -52,14 +52,14 @@ mkdir -p ~/scripts
 # Copy scripts
 echo "Copying scripts..."
 cp chromium-autostart.sh ~/
-cp scripts/start_chromium-monitor1.sh ~/scripts/
-cp scripts/start_chromium-monitor2.sh ~/scripts/
+cp scripts/start-chromium-monitor1.sh ~/scripts/
+cp scripts/start-chromium-monitor2.sh ~/scripts/
 
 # Make scripts executable
 echo "Making scripts executable..."
 chmod +x ~/chromium-autostart.sh
-chmod +x ~/scripts/start_chromium-monitor1.sh
-chmod +x ~/scripts/start_chromium-monitor2.sh
+chmod +x ~/scripts/start-chromium-monitor1.sh
+chmod +x ~/scripts/start-chromium-monitor2.sh
 
 echo "✓ Scripts installed"
 
@@ -67,8 +67,8 @@ echo "✓ Scripts installed"
 echo ""
 echo "Updating scripts with your username..."
 sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/chromium-autostart.sh
-sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start_chromium-monitor1.sh
-sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start_chromium-monitor2.sh
+sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start-chromium-monitor1.sh
+sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start-chromium-monitor2.sh
 
 # Detect desktop session
 DESKTOP_SESSION_TYPE=$(echo $DESKTOP_SESSION)
@@ -104,8 +104,8 @@ read -p "Enter your Home Assistant URL (e.g., https://homeassistant.local): " HA
 
 if [ ! -z "$HA_URL" ]; then
     echo "Updating scripts with your Home Assistant URL..."
-    sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start_chromium-monitor1.sh
-    sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start_chromium-monitor2.sh
+    sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start-chromium-monitor1.sh
+    sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start-chromium-monitor2.sh
     echo "✓ Home Assistant URL updated"
 fi
 
@@ -142,8 +142,8 @@ echo "  - Monitor 1 at position 0,0"
 echo "  - Monitor 2 at position 768,0"
 echo ""
 echo "If your layout is different, edit the scripts:"
-echo "  ~/scripts/start_chromium-monitor1.sh"
-echo "  ~/scripts/start_chromium-monitor2.sh"
+echo "  ~/scripts/start-chromium-monitor1.sh"
+echo "  ~/scripts/start-chromium-monitor2.sh"
 echo ""
 read -p "Press Enter to continue..."
 
@@ -155,8 +155,8 @@ echo "=========================================="
 echo ""
 echo "Next steps:"
 echo "1. Review and edit the scripts if needed:"
-echo "   - ~/scripts/start_chromium-monitor1.sh"
-echo "   - ~/scripts/start_chromium-monitor2.sh"
+echo "   - ~/scripts/start-chromium-monitor1.sh"
+echo "   - ~/scripts/start-chromium-monitor2.sh"
 echo ""
 echo "2. Test the setup manually:"
 echo "   ~/chromium-autostart.sh"
@@ -211,14 +211,14 @@ mkdir -p ~/scripts
 # Copy scripts
 echo "Copying scripts..."
 cp chromium-autostart.sh ~/
-cp scripts/start_chromium-monitor1.sh ~/scripts/
-cp scripts/start_chromium-monitor2.sh ~/scripts/
+cp scripts/start-chromium-monitor1.sh ~/scripts/
+cp scripts/start-chromium-monitor2.sh ~/scripts/
 
 # Make scripts executable
 echo "Making scripts executable..."
 chmod +x ~/chromium-autostart.sh
-chmod +x ~/scripts/start_chromium-monitor1.sh
-chmod +x ~/scripts/start_chromium-monitor2.sh
+chmod +x ~/scripts/start-chromium-monitor1.sh
+chmod +x ~/scripts/start-chromium-monitor2.sh
 
 echo "✓ Scripts installed"
 
@@ -226,8 +226,8 @@ echo "✓ Scripts installed"
 echo ""
 echo "Updating scripts with your username..."
 sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/chromium-autostart.sh
-sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start_chromium-monitor1.sh
-sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start_chromium-monitor2.sh
+sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start-chromium-monitor1.sh
+sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start-chromium-monitor2.sh
 
 # Detect desktop session
 DESKTOP_SESSION_TYPE=$(echo $DESKTOP_SESSION)
@@ -263,8 +263,8 @@ read -p "Enter your Home Assistant URL (e.g., https://homeassistant.local): " HA
 
 if [ ! -z "$HA_URL" ]; then
     echo "Updating scripts with your Home Assistant URL..."
-    sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start_chromium-monitor1.sh
-    sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start_chromium-monitor2.sh
+    sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start-chromium-monitor1.sh
+    sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start-chromium-monitor2.sh
     echo "✓ Home Assistant URL updated"
 fi
 
@@ -301,8 +301,8 @@ echo "  - Monitor 1 at position 0,0"
 echo "  - Monitor 2 at position 768,0"
 echo ""
 echo "If your layout is different, edit the scripts:"
-echo "  ~/scripts/start_chromium-monitor1.sh"
-echo "  ~/scripts/start_chromium-monitor2.sh"
+echo "  ~/scripts/start-chromium-monitor1.sh"
+echo "  ~/scripts/start-chromium-monitor2.sh"
 echo ""
 read -p "Press Enter to continue..."
 
@@ -314,8 +314,8 @@ echo "=========================================="
 echo ""
 echo "Next steps:"
 echo "1. Review and edit the scripts if needed:"
-echo "   - ~/scripts/start_chromium-monitor1.sh"
-echo "   - ~/scripts/start_chromium-monitor2.sh"
+echo "   - ~/scripts/start-chromium-monitor1.sh"
+echo "   - ~/scripts/start-chromium-monitor2.sh"
 echo ""
 echo "2. Test the setup manually:"
 echo "   ~/chromium-autostart.sh"

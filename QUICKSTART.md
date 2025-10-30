@@ -40,8 +40,8 @@ The installer will:
 Edit the scripts to point to your dashboards:
 
 ```bash
-nano ~/scripts/start_chromium-monitor1.sh
-nano ~/scripts/start_chromium-monitor2.sh
+nano ~/scripts/start-chromium-monitor1.sh
+nano ~/scripts/start-chromium-monitor2.sh
 ```
 
 Change:
@@ -102,7 +102,7 @@ cat ~/.cache/lxsession/rpd-x/run.log
 Test scripts manually:
 
 ```bash
-~/scripts/start_chromium-monitor1.sh
+~/scripts/start-chromium-monitor1.sh
 ```
 
 ### Need Help?

@@ -17,8 +17,8 @@ duodashboard-dual-screen/
 ├── chromium-autostart.sh              # Main autostart wrapper script
 │
 ├── scripts/                           # Chromium startup scripts
-│   ├── start_chromium-monitor1.sh    # Monitor 1 (left/primary)
-│   └── start_chromium-monitor2.sh    # Monitor 2 (right/secondary)
+│   ├── start-chromium-monitor1.sh    # Monitor 1 (left/primary)
+│   └── start-chromium-monitor2.sh    # Monitor 2 (right/secondary)
 │
 ├── autostart/                         # Desktop session autostart files
 │   ├── rpd-x-autostart               # For rpd-x desktop session
@@ -47,10 +47,10 @@ duodashboard-dual-screen/
 
 Contains the individual Chromium startup scripts:
 
-- **start_chromium-monitor1.sh**: Launches Chromium for the first monitor
+- **start-chromium-monitor1.sh**: Launches Chromium for the first monitor
   - Configured for window position 0,0
   - Uses separate user data directory
-- **start_chromium-monitor2.sh**: Launches Chromium for the second monitor
+- **start-chromium-monitor2.sh**: Launches Chromium for the second monitor
   - Configured for window position based on first monitor width
   - Uses separate user data directory
 
@@ -79,8 +79,8 @@ After running `install.sh`, files are installed to:
 ├── chromium-autostart.sh              # Main wrapper script
 │
 ├── scripts/
-│   ├── start_chromium-monitor1.sh
-│   └── start_chromium-monitor2.sh
+│   ├── start-chromium-monitor1.sh
+│   └── start-chromium-monitor2.sh
 │
 ├── .config/
 │   └── lxsession/
@@ -102,15 +102,15 @@ After running `install.sh`, files are installed to:
 
 Edit these files:
 
-- `scripts/start_chromium-monitor1.sh` - adjust `--window-position`
-- `scripts/start_chromium-monitor2.sh` - adjust `--window-position`
+- `scripts/start-chromium-monitor1.sh` - adjust `--window-position`
+- `scripts/start-chromium-monitor2.sh` - adjust `--window-position`
 
 ### To Change Dashboard URLs
 
 Edit these files:
 
-- `scripts/start_chromium-monitor1.sh` - change the `--app` URL
-- `scripts/start_chromium-monitor2.sh` - change the `--app` URL
+- `scripts/start-chromium-monitor1.sh` - change the `--app` URL
+- `scripts/start-chromium-monitor2.sh` - change the `--app` URL
 
 ### To Change Startup Delays
 
@@ -133,8 +133,8 @@ pkill chromium
 ~/chromium-autostart.sh
 
 # Or test individual scripts
-~/scripts/start_chromium-monitor1.sh &
-~/scripts/start_chromium-monitor2.sh &
+~/scripts/start-chromium-monitor1.sh &
+~/scripts/start-chromium-monitor2.sh &
 ```
 
 ### Adding Features

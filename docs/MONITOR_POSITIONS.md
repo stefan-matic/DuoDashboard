@@ -83,8 +83,8 @@ This assumes:
 1. Run `xrandr` to see your layout
 2. Note the positions of each monitor
 3. Edit the scripts:
-   - `~/scripts/start_chromium-monitor1.sh`
-   - `~/scripts/start_chromium-monitor2.sh`
+   - `~/scripts/start-chromium-monitor1.sh`
+   - `~/scripts/start-chromium-monitor2.sh`
 4. Update the `--window-position=X,Y` parameters
 5. Test with: `~/chromium-autostart.sh`
 

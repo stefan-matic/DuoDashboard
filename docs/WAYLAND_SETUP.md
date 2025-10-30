@@ -69,9 +69,9 @@ wlr-randr --output HDMI-A-2 --pos 768,0 &
 sleep 2
 
 # Start Chromium instances
-/home/pi/scripts/start_chromium-monitor1-wayland.sh &
+/home/pi/scripts/start-chromium-monitor1-wayland.sh &
 sleep 3
-/home/pi/scripts/start_chromium-monitor2-wayland.sh &
+/home/pi/scripts/start-chromium-monitor2-wayland.sh &
 ```
 
 Make it executable:
@@ -82,7 +82,7 @@ chmod +x ~/.config/labwc/autostart
 
 #### 2. Create Wayland-Specific Chromium Scripts
 
-Create `~/scripts/start_chromium-monitor1-wayland.sh`:
+Create `~/scripts/start-chromium-monitor1-wayland.sh`:
 
 ```bash
 #!/bin/bash
@@ -99,7 +99,7 @@ chromium --noerrdialogs \
   --ozone-platform=wayland
 ```
 
-Create `~/scripts/start_chromium-monitor2-wayland.sh`:
+Create `~/scripts/start-chromium-monitor2-wayland.sh`:
 
 ```bash
 #!/bin/bash
@@ -119,8 +119,8 @@ chromium --noerrdialogs \
 Make executable:
 
 ```bash
-chmod +x ~/scripts/start_chromium-monitor1-wayland.sh
-chmod +x ~/scripts/start_chromium-monitor2-wayland.sh
+chmod +x ~/scripts/start-chromium-monitor1-wayland.sh
+chmod +x ~/scripts/start-chromium-monitor2-wayland.sh
 ```
 
 #### 3. Optional: Window Rules (May Not Work Reliably)
@@ -159,8 +159,8 @@ Create `~/.config/wayfire.ini`:
 
 ```ini
 [autostart]
-chromium1 = /home/pi/scripts/start_chromium-monitor1-wayland.sh
-chromium2 = /home/pi/scripts/start_chromium-monitor2-wayland.sh
+chromium1 = /home/pi/scripts/start-chromium-monitor1-wayland.sh
+chromium2 = /home/pi/scripts/start-chromium-monitor2-wayland.sh
 
 [output:HDMI-A-1]
 mode = 1360x768@60

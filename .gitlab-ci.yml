@@ -11,8 +11,8 @@ shellcheck:
   image: koalaman/shellcheck-alpine:stable
   script:
     - shellcheck chromium-autostart.sh
-    - shellcheck scripts/start_chromium-monitor1.sh
-    - shellcheck scripts/start_chromium-monitor2.sh
+    - shellcheck scripts/start-chromium-monitor1.sh
+    - shellcheck scripts/start-chromium-monitor2.sh
     - shellcheck install.sh
   allow_failure: true
 
@@ -22,8 +22,8 @@ bash_syntax:
   image: bash:latest
   script:
     - bash -n chromium-autostart.sh
-    - bash -n scripts/start_chromium-monitor1.sh
-    - bash -n scripts/start_chromium-monitor2.sh
+    - bash -n scripts/start-chromium-monitor1.sh
+    - bash -n scripts/start-chromium-monitor2.sh
     - bash -n install.sh
   allow_failure: false
 
@@ -45,8 +45,8 @@ scripts_check:
   image: alpine:latest
   script:
     - test -f chromium-autostart.sh || (echo "chromium-autostart.sh missing" && exit 1)
-    - test -f scripts/start_chromium-monitor1.sh || (echo "start_chromium-monitor1.sh missing" && exit 1)
-    - test -f scripts/start_chromium-monitor2.sh || (echo "start_chromium-monitor2.sh missing" && exit 1)
+    - test -f scripts/start-chromium-monitor1.sh || (echo "start-chromium-monitor1.sh missing" && exit 1)
+    - test -f scripts/start-chromium-monitor2.sh || (echo "start-chromium-monitor2.sh missing" && exit 1)
     - test -f install.sh || (echo "install.sh missing" && exit 1)
     - echo "All required scripts present"
   allow_failure: false

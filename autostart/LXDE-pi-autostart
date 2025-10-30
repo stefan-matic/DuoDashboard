@@ -1,21 +1,15 @@
-#!/bin/bash
-# Chromium startup script for Monitor 2 (Right/Secondary)
-# Configure DISPLAY environment variable for X11
-export DISPLAY=:0
+# Autostart configuration for LXDE-pi (Legacy LXDE)
+# This file is placed in: ~/.config/lxsession/LXDE-pi/autostart
+# Lines starting with @ are autostart entries
 
-# Launch Chromium with kiosk-friendly settings
-# - noerrdialogs: Suppress error dialogs
-# - disable-infobars: Hide information bars
-# - app: Launch in app mode (minimal UI)
-# - start-fullscreen: Open in fullscreen mode
-# - window-position: Place window at specific coordinates (768 = width of monitor 1)
-# - user-data-dir: Use separate profile to allow multiple instances
+# Launch desktop file manager
+@pcmanfm --desktop --profile LXDE-pi
 
-chromium --noerrdialogs \
---disable-infobars \
---app="https://<your-home-assistant-url>/dashboard-magicmirror/2" \
---start-fullscreen \
---window-position=768,0 \
---user-data-dir=/home/pi/.chromium-monitor2
+# Disable screen blanking and power management
+@xset s off
+@xset -dpms
+@xset s noblank
+
+# Start the Chromium kiosk setup
 # Note: Adjust the username in the path if different from 'pi'
 @/home/pi/chromium-autostart.sh
