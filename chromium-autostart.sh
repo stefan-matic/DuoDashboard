@@ -1,19 +1,19 @@
 #!/bin/bash
-# Chromium startup script for Monitor 2 (Right/Secondary)
+# Main autostart script for dual monitor DuoDashboard setup
+# This script launches both Chromium instances with appropriate delays
+
 # Configure DISPLAY environment variable for X11
 export DISPLAY=:0
 
-# Launch Chromium with kiosk-friendly settings
-# - noerrdialogs: Suppress error dialogs
-# - disable-infobars: Hide information bars
-# - app: Launch in app mode (minimal UI)
-# - start-fullscreen: Open in fullscreen mode
-# - window-position: Place window at specific coordinates (768 = width of monitor 1)
-# - user-data-dir: Use separate profile to allow multiple instances
+# Launch first monitor (left/primary)
+echo "Starting Chromium for Monitor 1..."
+~/scripts/start-chromium-monitor1.sh &
 
-chromium --noerrdialogs \
---disable-infobars \
---app="https://<your-home-assistant-url>/dashboard-magicmirror/2" \
---start-fullscreen \
---window-position=768,0 \
---user-data-dir=/home/pi/.chromium-monitor2
+# Wait a moment before launching second instance
+sleep 3
+
+# Launch second monitor (right/secondary)  
+echo "Starting Chromium for Monitor 2..."
+~/scripts/start-chromium-monitor2.sh &
+
+echo "DuoDashboard startup complete"

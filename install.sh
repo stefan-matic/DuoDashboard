@@ -71,7 +71,7 @@ sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start-chromium-monitor1.sh
 sed -i "s|/home/pi|/home/$CURRENT_USER|g" ~/scripts/start-chromium-monitor2.sh
 
 # Detect desktop session
-DESKTOP_SESSION_TYPE=$(echo $DESKTOP_SESSION)
+DESKTOP_SESSION_TYPE="$DESKTOP_SESSION"
 echo ""
 echo "Detected desktop session: $DESKTOP_SESSION_TYPE"
 
@@ -100,9 +100,9 @@ echo "=========================================="
 echo "Configuration"
 echo "=========================================="
 echo ""
-read -p "Enter your Home Assistant URL (e.g., https://homeassistant.local): " HA_URL
+read -r -p "Enter your Home Assistant URL (e.g., https://homeassistant.local): " HA_URL
 
-if [ ! -z "$HA_URL" ]; then
+if [ -n "$HA_URL" ]; then
     echo "Updating scripts with your Home Assistant URL..."
     sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start-chromium-monitor1.sh
     sed -i "s|https://<your-home-assistant-url>|$HA_URL|g" ~/scripts/start-chromium-monitor2.sh
@@ -145,7 +145,7 @@ echo "If your layout is different, edit the scripts:"
 echo "  ~/scripts/start-chromium-monitor1.sh"
 echo "  ~/scripts/start-chromium-monitor2.sh"
 echo ""
-read -p "Press Enter to continue..."
+read -r -p "Press Enter to continue..."
 
 # Installation complete
 echo ""

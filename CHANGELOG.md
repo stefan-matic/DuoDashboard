@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2024-10-30
+
+### Fixed
+- **ShellCheck Compliance**: Resolved all ShellCheck warnings and style issues
+  - SC2116: Removed useless echo in DESKTOP_SESSION assignment
+  - SC2086: Added proper quoting to prevent globbing and word splitting
+  - SC2162: Added `-r` flag to read commands to prevent backslash mangling
+- **Script Restoration**: Fixed corrupted chromium-autostart.sh file
+  - Restored proper main autostart script functionality
+  - Improved script comments and structure
+
+### Changed
+- **Code Quality**: Enhanced shell script best practices
+  - Simplified variable assignments 
+  - Used `-n` instead of `! -z` for string length testing
+  - Improved error handling and quoting consistency
+
 ## [1.1.0] - 2024-10-30
 
 ### Added
