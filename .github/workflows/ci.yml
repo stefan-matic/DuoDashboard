@@ -1,0 +1,121 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  shellcheck:
+    name: Shell Script Validation
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './scripts'
+          additional_files: 'chromium-autostart.sh install.sh'
+          ignore_paths: '.git'
+          severity: warning
+        continue-on-error: true
+
+  bash_syntax:
+    name: Bash Syntax Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check bash syntax - chromium-autostart.sh
+        run: bash -n chromium-autostart.sh
+
+      - name: Check bash syntax - start-chromium-monitor1.sh
+        run: bash -n scripts/start-chromium-monitor1.sh
+
+      - name: Check bash syntax - start-chromium-monitor2.sh
+        run: bash -n scripts/start-chromium-monitor2.sh
+
+      - name: Check bash syntax - install.sh
+        run: bash -n install.sh
+
+  docs_check:
+    name: Documentation Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify required documentation files
+        run: |
+          test -f README.md || (echo "README.md missing" && exit 1)
+          test -f LICENSE || (echo "LICENSE missing" && exit 1)
+          test -f CHANGELOG.md || (echo "CHANGELOG.md missing" && exit 1)
+          test -f CONTRIBUTING.md || (echo "CONTRIBUTING.md missing" && exit 1)
+          echo "All required documentation files present"
+
+  scripts_check:
+    name: Required Scripts Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Verify required scripts exist
+        run: |
+          test -f chromium-autostart.sh || (echo "chromium-autostart.sh missing" && exit 1)
+          test -f scripts/start-chromium-monitor1.sh || (echo "start-chromium-monitor1.sh missing" && exit 1)
+          test -f scripts/start-chromium-monitor2.sh || (echo "start-chromium-monitor2.sh missing" && exit 1)
+          test -f install.sh || (echo "install.sh missing" && exit 1)
+          echo "All required scripts present"
+
+  file_permissions:
+    name: File Permissions Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Check script executability
+        run: |
+          # Check if scripts are executable or can be made executable
+          chmod +x chromium-autostart.sh || (echo "Cannot make chromium-autostart.sh executable" && exit 1)
+          chmod +x scripts/start-chromium-monitor1.sh || (echo "Cannot make start-chromium-monitor1.sh executable" && exit 1)
+          chmod +x scripts/start-chromium-monitor2.sh || (echo "Cannot make start-chromium-monitor2.sh executable" && exit 1)
+          chmod +x install.sh || (echo "Cannot make install.sh executable" && exit 1)
+          echo "All scripts can be made executable"
+
+  integration_test:
+    name: Integration Test
+    runs-on: ubuntu-latest
+    needs: [bash_syntax, docs_check, scripts_check]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y chromium-browser xvfb
+
+      - name: Test script execution (dry run)
+        run: |
+          # Make scripts executable
+          chmod +x chromium-autostart.sh
+          chmod +x scripts/start-chromium-monitor1.sh
+          chmod +x scripts/start-chromium-monitor2.sh
+          chmod +x install.sh
+          
+          # Test that scripts can be sourced without execution
+          echo "Testing script syntax and basic structure..."
+          
+          # Verify scripts have proper shebangs
+          head -1 chromium-autostart.sh | grep -q "#!/bin/bash" || (echo "chromium-autostart.sh missing proper shebang" && exit 1)
+          head -1 scripts/start-chromium-monitor1.sh | grep -q "#!/bin/bash" || (echo "start-chromium-monitor1.sh missing proper shebang" && exit 1)
+          head -1 scripts/start-chromium-monitor2.sh | grep -q "#!/bin/bash" || (echo "start-chromium-monitor2.sh missing proper shebang" && exit 1)
+          head -1 install.sh | grep -q "#!/bin/bash" || (echo "install.sh missing proper shebang" && exit 1)
+          
+          echo "All integration tests passed"

@@ -1,0 +1,99 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get tag
+        id: tag
+        run: echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.tag }}
+          release_name: DuoDashboard ${{ steps.tag.outputs.tag }}
+          body: |
+            ## DuoDashboard Release ${{ steps.tag.outputs.tag }}
+            
+            A complete setup for running dual Home Assistant dashboards on Raspberry Pi 4 with two monitors in kiosk mode.
+            
+            ### 🚀 Quick Start
+            ```bash
+            git clone https://github.com/stefan-matic/Duo-Dashboard.git
+            cd Duo-Dashboard
+            chmod +x install.sh
+            ./install.sh
+            sudo reboot
+            ```
+            
+            ### 📋 What's Included
+            - Automated installation script
+            - Chromium startup scripts optimized for kiosk use
+            - Desktop autostart configuration
+            - Comprehensive documentation and troubleshooting guides
+            
+            ### 🔧 Requirements
+            - Raspberry Pi 4 (2GB+ RAM recommended)
+            - Two HDMI monitors
+            - Raspberry Pi OS (Bookworm or later)
+            - Home Assistant instance (accessible via network)
+            
+            See [README.md](README.md) for complete installation and configuration instructions.
+          draft: false
+          prerelease: false
+
+  validate_release:
+    name: Validate Release Files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate release completeness
+        run: |
+          echo "Validating release files..."
+          
+          # Check all required files exist
+          test -f README.md || (echo "README.md missing" && exit 1)
+          test -f LICENSE || (echo "LICENSE missing" && exit 1)
+          test -f CHANGELOG.md || (echo "CHANGELOG.md missing" && exit 1)
+          test -f CONTRIBUTING.md || (echo "CONTRIBUTING.md missing" && exit 1)
+          test -f QUICKSTART.md || (echo "QUICKSTART.md missing" && exit 1)
+          test -f PROJECT_STRUCTURE.md || (echo "PROJECT_STRUCTURE.md missing" && exit 1)
+          
+          # Check scripts
+          test -f chromium-autostart.sh || (echo "chromium-autostart.sh missing" && exit 1)
+          test -f scripts/start-chromium-monitor1.sh || (echo "start-chromium-monitor1.sh missing" && exit 1)
+          test -f scripts/start-chromium-monitor2.sh || (echo "start-chromium-monitor2.sh missing" && exit 1)
+          test -f install.sh || (echo "install.sh missing" && exit 1)
+          
+          # Check documentation
+          test -d docs || (echo "docs directory missing" && exit 1)
+          test -f docs/MONITOR_POSITIONS.md || (echo "docs/MONITOR_POSITIONS.md missing" && exit 1)
+          test -f docs/WAYLAND_SETUP.md || (echo "docs/WAYLAND_SETUP.md missing" && exit 1)
+          
+          # Check autostart files
+          test -d autostart || (echo "autostart directory missing" && exit 1)
+          test -f autostart/rpd-x-autostart || (echo "autostart/rpd-x-autostart missing" && exit 1)
+          test -f autostart/LXDE-pi-autostart || (echo "autostart/LXDE-pi-autostart missing" && exit 1)
+          
+          echo "All release files validated successfully"
+
+      - name: Test installation script syntax
+        run: |
+          chmod +x install.sh
+          bash -n install.sh
+          echo "Installation script syntax validated"
